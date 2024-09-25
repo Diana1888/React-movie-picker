@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Form from './components/Form';
 import { AuthProvider } from './context/authContext';
@@ -19,6 +19,7 @@ function App() {
             <Route path="/list" element={<MovieList />} />
             <Route path="/movie/:id" element={<MovieListItem />} />
           </Route>
+          <Route path="*" element={<Navigate to="/login" />}/>
         </Routes>
       </AuthProvider>
     </>
