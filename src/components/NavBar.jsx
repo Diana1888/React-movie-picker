@@ -4,7 +4,7 @@ import { auth } from '../firebase.config';
 import { useContext } from 'react';
 import AuthContext from '../context/authContext';
 
-const Navbar = () => {
+const NavBar = () => {
   const { setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -22,6 +22,9 @@ const Navbar = () => {
 
   return (
     <nav>
+      <NavLink className="btn-form active sign-out" to={'/wishlist'}>
+        Wishlist
+      </NavLink>
       <NavLink
         className="btn-form active sign-out"
         to={'/'}
@@ -33,4 +36,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

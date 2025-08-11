@@ -1,13 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from './Navbar';
+import { useNavigate, useParams } from 'react-router-dom';
 import movieLoader from '../assets/movieLoader.gif';
+import NavBar from './NavBar';
+import { useWishlist } from '../context/WishlistContext';
+import FavIcon from './FavIcon';
 
 const MovieListItem = () => {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const { id } = useParams();
-
   const [movie, setMovie] = useState(null);
+  const navigate = useNavigate();
+  const { addToWishlist, wishlist } = useWishlist();
+  const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    if (movie) {
+      const isInWishlist = wishlist.some((m) => m.id === movie.id);
+      setSelected(isInWishlist);
+    }
+  }, [movie, wishlist]);
+
+  const handleToggleFav = (e) => {
+    e.stopPropagation();
+    setSelected((prev) => {
+      const newValue = !prev;
+      if (newValue) {
+        addToWishlist(movie);
+      }
+      return newValue;
+    });
+  };
 
   const getMovieDetails = () => {
     fetch(
@@ -32,8 +54,7 @@ const MovieListItem = () => {
   }
 
   return (
-    <div className="list-container">
-      <Navbar />
+    <div className="movie-item-wrapper">
       <div className="movie-item-container">
         <img
           className="img-item"
@@ -53,7 +74,19 @@ const MovieListItem = () => {
               </span>
             ))}
           </div>
+          <div onClick={handleToggleFav}>
+            <FavIcon selected={selected} />
+          </div>
         </div>
+      </div>
+      <div className="btns-container">
+        <button
+          className="btn-form active sign-out"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+        <NavBar />
       </div>
     </div>
   );

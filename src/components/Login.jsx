@@ -31,7 +31,6 @@ const Login = ({
     signInWithEmailAndPassword(auth, emailLogin, passwordLogin)
       .then((userCredential) => {
         setIsLoggedIn(userCredential.user);
-
         if (rememberPass) {
           localStorage.setItem('email', emailLogin);
           localStorage.setItem('password', passwordLogin);

@@ -28,7 +28,6 @@ const ResetPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
         <button className="btn-form active" type="submit">
           Reset Password
         </button>

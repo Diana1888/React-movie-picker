@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const listenAuth = onAuthStateChanged(auth, (user) => {
@@ -14,14 +15,13 @@ export const AuthProvider = ({ children }) => {
       } else {
         setIsLoggedIn(null);
       }
+      setLoading(false);
     });
-    return () => {
-      listenAuth();
-    };
+    return listenAuth;
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, loading, setIsLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

@@ -28,16 +28,18 @@ body {
   max-height: 714px;
   border-radius: 30px;
   overflow: hidden;
+  background-color: #ffffff;
 }
 
 .form {
   background-color: #ffffff;
-  padding: 46px 66px 0;
+  padding: 0px 66px;
   max-width: 550px;
   padding-bottom: 60px;
 }
 
 .header {
+  padding: 46px 66px 0;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -70,12 +72,15 @@ body {
 
 .img-container {
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 746px;
+  background-color: #101648;
 }
 
 .main-img {
-  max-width: 746px;
-  object-fit: cover;
-  height: 100%;
+  width: 70%;
 }
 
 .signup {
@@ -149,9 +154,6 @@ input[type='checkbox'] {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-bottom: 15px;
-}
-
-.movie-poster {
   cursor: pointer;
 }
 
@@ -166,9 +168,16 @@ input[type='checkbox'] {
   margin: auto;
 }
 
+.movie-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
 .movie-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -190,9 +199,8 @@ nav {
 
 .sign-out {
   margin-left: auto;
-  width: 80px;
+  width: 100px;
   text-align: center;
-  margin-right: 20px;
 }
 
 .sign-out:hover {
@@ -217,8 +225,9 @@ nav {
 .movie-item-container {
   display: flex;
   justify-content: space-between;
-
-  width: 70%;
+  width: 60%;
+  min-width: 60%;
+  max-width: 100vw;
   margin: auto;
   margin-top: 70px;
   margin-bottom: 30px;
@@ -235,6 +244,7 @@ nav {
   display: flex;
   flex-direction: column;
   padding: 40px 80px;
+  flex-grow: 1;
 }
 
 .movie-tagline {
@@ -276,4 +286,123 @@ hr {
 
 .success-message {
   font-size: 18px;
+}
+
+.mobile-header {
+  display: none;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1300px) {
+  .movie-item-container {
+    flex-direction: column;
+  }
+
+  .img-item {
+    max-width: unset;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    height: unset;
+    max-width: 100vw;
+  }
+  .wrapper {
+    flex-direction: column;
+    max-height: unset;
+    height: auto;
+    width: 100%;
+  }
+
+  .form {
+    padding: 20px 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .section {
+    display: flex;
+    justify-content: center;
+    order: 2;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background-color: #8463d0;
+    padding: 10px 0;
+  }
+
+  .header-name {
+    color: #ffffff;
+  }
+
+  .header {
+    display: none;
+  }
+}
+
+@media (max-width: 1150px) {
+  .movie-poster {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .genres-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .genres-item {
+    margin-top: 5px;
+  }
+  .movie-info {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    width: 90%;
+  }
+
+  .movie-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 550px) {
+  .movie-item {
+    padding: 10px;
+  }
+  .movie-poster {
+    max-width: 120px;
+  }
+
+  .movie-info {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-name {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .movie-poster {
+    max-width: 100px;
+  }
 }
