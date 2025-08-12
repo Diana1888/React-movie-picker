@@ -2,6 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import AuthContext from '../context/authContext';
 import movieLoader from '../assets/movieLoader.gif';
 import { useContext } from 'react';
+import NavBar from './NavBar';
 
 const ProtectedRoutes = () => {
   const { isLoggedIn, loading } = useContext(AuthContext);
@@ -14,7 +15,12 @@ const ProtectedRoutes = () => {
     return <Navigate to="/" />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <NavBar />
+      <Outlet />;
+    </>
+  );
 };
 
 export default ProtectedRoutes;

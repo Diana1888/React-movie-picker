@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import movieLoader from '../assets/movieLoader.gif';
-import NavBar from './NavBar';
 import { useWishlist } from '../context/WishlistContext';
 import FavIcon from './FavIcon';
 
@@ -54,41 +53,41 @@ const MovieListItem = () => {
   }
 
   return (
-    <div className="movie-item-wrapper">
-      <div className="movie-item-container">
-        <img
-          className="img-item"
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt="movie"
-        />
-        <div className="movie-info">
-          <p className="movie-tagline">{movie.tagline}</p>
-          <h1 className="movie-title">{movie.original_title}</h1>
-          <p className="movie-desc">{movie.overview}</p>
-          <p className="movie-desc">Release date: {movie.release_date}</p>
-          <hr />
-          <div className="genres-container">
-            {movie.genres.map((genre) => (
-              <span key={genre.id} className="genres-item">
-                {genre.name}
-              </span>
-            ))}
-          </div>
-          <div onClick={handleToggleFav}>
-            <FavIcon selected={selected} />
+    <>
+      <div className="movie-item-wrapper">
+        <div className="movie-item-container">
+          <img
+            className="img-item"
+            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            alt="movie"
+          />
+          <div className="movie-info">
+            <p className="movie-tagline">{movie.tagline}</p>
+            <h1 className="movie-title">{movie.original_title}</h1>
+            <p className="movie-desc">{movie.overview}</p>
+            <p className="movie-desc">Release date: {movie.release_date}</p>
+            <hr />
+            <div className="genres-container">
+              {movie.genres.map((genre) => (
+                <span key={genre.id} className="genres-item">
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+            <div className="favIcon" onClick={handleToggleFav}>
+              <FavIcon selected={selected} />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="btns-container">
-        <button
-          className="btn-form active sign-out"
+
+        {/* <button
+          className="btn-form active navlink"
           onClick={() => navigate(-1)}
         >
           Back
-        </button>
-        <NavBar />
+        </button> */}
       </div>
-    </div>
+    </>
   );
 };
 

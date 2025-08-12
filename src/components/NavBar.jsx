@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase.config';
 import { useContext } from 'react';
@@ -7,6 +7,7 @@ import AuthContext from '../context/authContext';
 const NavBar = () => {
   const { setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -20,13 +21,23 @@ const NavBar = () => {
       });
   };
 
+  const showBackButton = location.pathname !== '/list';
+
   return (
-    <nav>
-      <NavLink className="btn-form active sign-out" to={'/wishlist'}>
+    <nav className="navbar">
+      {showBackButton && (
+        <button
+          className="btn-form active navlink backBtn"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+      )}
+      <NavLink className="btn-form active navlink" to={'/wishlist'}>
         Wishlist
       </NavLink>
       <NavLink
-        className="btn-form active sign-out"
+        className="btn-form active navlink"
         to={'/'}
         onClick={handleSignOut}
       >
