@@ -1,24 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import NavBar from './NavBar';
-import WishList from './WishList';
 
 const MovieList = () => {
-  const [mySearch, setMySearch] = useState('');
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const [moviesList, setMoviesList] = useState([]);
-  const [searchSubmitted, setSearchSubmitted] = useState('');
-
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   const getMovies = () => {
-    const url = searchSubmitted.trim()
-      ? `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(
-          searchSubmitted
-        )}&page=${page}`
-      : `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`;
-
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`;
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
@@ -35,7 +25,7 @@ const MovieList = () => {
 
   useEffect(() => {
     getMovies();
-  }, [page, searchSubmitted]);
+  }, [page]);
 
   const handleMovieItem = (id) => {
     navigate(`/movie/${id}`);
@@ -45,23 +35,10 @@ const MovieList = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setMoviesList([]);
-    setPage(1);
-    setSearchSubmitted(mySearch);
-  };
-
   return (
     <>
       <div className="list-container">
         <h1 className="list-title">Popular Movies</h1>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input type="text" onChange={(e) => setMySearch(e.target.value)} />
-            <button type="submit">Search</button>
-          </form>
-        </div>
         <div className="movie-list">
           {moviesList.map((movie, index) => (
             <div

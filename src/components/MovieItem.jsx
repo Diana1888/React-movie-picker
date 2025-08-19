@@ -9,7 +9,7 @@ const MovieListItem = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
-  const { addToWishlist, wishlist } = useWishlist();
+  const { addToWishlist, wishlist, removeFromWishlist } = useWishlist();
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
@@ -25,6 +25,8 @@ const MovieListItem = () => {
       const newValue = !prev;
       if (newValue) {
         addToWishlist(movie);
+      } else {
+        removeFromWishlist(movie.id);
       }
       return newValue;
     });
@@ -79,13 +81,6 @@ const MovieListItem = () => {
             </div>
           </div>
         </div>
-
-        {/* <button
-          className="btn-form active navlink"
-          onClick={() => navigate(-1)}
-        >
-          Back
-        </button> */}
       </div>
     </>
   );
