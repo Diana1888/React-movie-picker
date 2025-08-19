@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import MovieRating from './MovieRating';
 
 const MovieList = () => {
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
@@ -46,11 +47,14 @@ const MovieList = () => {
               className="movie-item"
               onClick={() => handleMovieItem(movie.id)}
             >
-              <img
-                className="movie-poster"
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt="movie"
-              />
+              <div className="poster-wrapper">
+                <img
+                  className="movie-poster"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={movie.title}
+                />
+                <MovieRating rating={movie.vote_average} />
+              </div>
             </div>
           ))}
         </div>
