@@ -30,7 +30,10 @@ const WishList = () => {
             <h3 className="wishlist-movie-title">{movie.title}</h3>
             <button
               className="btn-form active"
-              onClick={() => removeFromWishlist(movie.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeFromWishlist(movie.id);
+              }}
             >
               Remove X
             </button>
